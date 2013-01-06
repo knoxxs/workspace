@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<!-- saved from url=(0087)http://blog.wakatta.jp/blog/2011/12/03/seven-databases-in-seven-weeks-postgresql-day-1/ -->
+<html class="js video maskImage placeholder" lang="en"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Seven Databases in Seven Weeks PostgreSQL Day 1 - Wakatta!</title>
+  <meta name="author" content="Frédéric Dumont">
+
+  
+  <meta name="description" content="The first database in the series is a relational database, and what better choice than PostgreSQL? Of course, MySQL is more popular, but if we are …">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+  <link rel="canonical" href="./PostgreSQL Day 1_files/PostgreSQL Day 1.html">
+  <link href="http://blog.wakatta.jp/favicon.png" rel="icon">
+  <link href="./PostgreSQL Day 1_files/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="./PostgreSQL Day 1_files/jXHR.js"></script><script type="text/javascript" async="" src="./PostgreSQL Day 1_files/ga.js"></script><script src="./PostgreSQL Day 1_files/modernizr-2.0.js"></script>
+  <script src="./PostgreSQL Day 1_files/ender.js"></script>
+  <script src="./PostgreSQL Day 1_files/octopress.js" type="text/javascript"></script>
+  <link href="http://blog.wakatta.jp/atom.xml" rel="alternate" title="Wakatta!" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="./PostgreSQL Day 1_files/css" rel="stylesheet" type="text/css">
+<link href="./PostgreSQL Day 1_files/css(1)" rel="stylesheet" type="text/css">
+
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26245052-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+<script type="text/javascript" async="" src="./PostgreSQL Day 1_files/embed.js"></script><script type="text/javascript" async="" src="./PostgreSQL Day 1_files/widgets.js"></script><script type="text/javascript" src="./PostgreSQL Day 1_files/fdumontmd" async=""></script><script src="./PostgreSQL Day 1_files/thread.js" async="" charset="UTF-8"></script><link rel="stylesheet" type="text/css" href="./PostgreSQL Day 1_files/defaults.css"><script src="./PostgreSQL Day 1_files/disqus.js" async="" charset="UTF-8"></script><link rel="stylesheet" type="text/css" href="./PostgreSQL Day 1_files/theme.css"><script src="./PostgreSQL Day 1_files/theme.js" async="" charset="UTF-8"></script><script src="./PostgreSQL Day 1_files/event.js" async="" charset="UTF-8"></script></head>
+
+<body data-twttr-rendered="true">
+  <header role="banner"><hgroup>
+  <h1><a href="http://blog.wakatta.jp/">Wakatta!</a></h1>
+  
+    <h2>Like Eureka!, only cooler</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://blog.wakatta.jp/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.wakatta.jp">
+    <input class="search" type="text" name="q" results="0" placeholder="Search">
+  </fieldset><fieldset class="mobile-nav"><select><option value="">Navigate…</option><option value="http://blog.wakatta.jp/">» Blog</option><option value="http://blog.wakatta.jp/blog/archives">» Archives</option><option value="http://blog.wakatta.jp/atom.xml">» RSS</option></select></fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="http://blog.wakatta.jp/">Blog</a></li>
+  <li><a href="http://blog.wakatta.jp/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Seven Databases in Seven Weeks PostgreSQL Day 1</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-03T12:22:00+09:00" pubdate="" data-updated="true">Dec 3<span>rd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>The first database in the series is a relational database, and what better choice than <a href="http://www.postgresql.org/">PostgreSQL</a>?</p>
+
+<!--more-->
+
+
+<p>Of course, <a href="http://www.mysql.com/">MySQL</a> is more popular, but if we are going to talk about SQL and the relational model, it is better to pick a database that actually takes these concepts seriously.</p>
+
+<p>The idea to start with a relational database is a good one. I feel that many who embrace NoSQL do so because they do not understand either SQL or the relational model. I was surprised to discover that some of my college educated colleagues did not know SQL at all. They were taught mostly about Java and object oriented design (I would ask for a refund). SQL databases have been developed, refined, and used in production for about 40 years. That’s more than half the history of computers, they’re likely to be part of the landscape for a few more decades, so ignoring them may be trendy but it is not wise.</p>
+
+<p>About the PostgreSQL version: the book appears to have been long in the making, as it still refers the reader to the version 9.0, while <a href="http://www.postgresql.org/docs/9.1/static/release-9-1-1.html">9.1</a> has been out for a few months.</p>
+
+<p>Installing then extensions that are needed for this book is easier with 9.1. Just using <a href="http://www.postgresql.org/docs/current/static/sql-createextension.html"><code>CREATE EXTENSION</code></a>:</p>
+
+<figure class="code"><figcaption><span>Installing Extensions  </span></figcaption>
+ <div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="sql"><span class="line"><span class="k">CREATE</span> <span class="n">EXTENSION</span> <span class="n">tablefunc</span><span class="p">;</span>
+</span><span class="line"><span class="k">CREATE</span> <span class="n">EXTENSION</span> <span class="n">dict_xsyn</span><span class="p">;</span>
+</span><span class="line"><span class="k">CREATE</span> <span class="n">EXTENSION</span> <span class="n">fuzzystrmatch</span><span class="p">;</span>
+</span><span class="line"><span class="k">CREATE</span> <span class="n">EXTENSION</span> <span class="n">pg_trgm</span><span class="p">;</span>
+</span><span class="line"><span class="k">CREATE</span> <span class="n">EXTENSION</span> <span class="k">cube</span><span class="p">;</span>
+</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>Removing them is done with the command <a href="http://www.postgresql.org/docs/current/static/sql-dropextension.html"><code>DROP EXTENSION</code></a>.</p>
+
+<h3>The events table</h3>
+
+<p>The code to create and fills the <code>events</code> table:</p>
+
+<figure class="code"><figcaption><span>Creating and filling the events table  </span></figcaption>
+ <div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="sql"><span class="line"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">events</span> <span class="p">(</span>
+</span><span class="line">  <span class="n">event_id</span> <span class="nb">SERIAL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+</span><span class="line">  <span class="n">title</span> <span class="nb">text</span><span class="p">,</span>
+</span><span class="line">  <span class="n">starts</span> <span class="k">timestamp</span><span class="p">,</span>
+</span><span class="line">  <span class="n">ends</span> <span class="k">timestamp</span><span class="p">,</span>
+</span><span class="line">  <span class="n">venue_id</span> <span class="nb">integer</span><span class="p">,</span>
+</span><span class="line">  <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">venue_id</span><span class="p">)</span>
+</span><span class="line">    <span class="k">REFERENCES</span> <span class="n">venues</span> <span class="p">(</span><span class="n">venue_id</span><span class="p">)</span>
+</span><span class="line"><span class="p">);</span>
+</span><span class="line">
+</span><span class="line"><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">events</span> <span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">,</span> <span class="n">venue_id</span><span class="p">)</span>
+</span><span class="line"><span class="k">VALUES</span> <span class="p">(</span><span class="s1">'My Book Signing'</span><span class="p">,</span> <span class="s1">'2012-02-15 17:30:00'</span><span class="p">,</span> <span class="s1">'2012-02-15 19:30:00'</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+</span><span class="line">       <span class="p">(</span><span class="s1">'April Fools Day'</span><span class="p">,</span> <span class="s1">'2012-04-01 00:00:00'</span><span class="p">,</span> <span class="s1">'2012-04-01 23:59:00'</span><span class="p">,</span> <span class="k">NULL</span><span class="p">),</span>
+</span><span class="line">       <span class="p">(</span><span class="s1">'Christmas Day'</span><span class="p">,</span>   <span class="s1">'2012-12-25 00:00:00'</span><span class="p">,</span> <span class="s1">'2012-12-25 23:59:00'</span><span class="p">,</span> <span class="k">NULL</span><span class="p">);</span>
+</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<h3>On indexes</h3>
+
+<p>I don’t have a PostgreSQL 9.0 instance to check, but with 9.1 at least, <code>UNIQUE</code> constraints are implemented through a <code>btree</code> index, not a <code>hash</code> one. The difference is that a <code>btree</code> index is sorted and so supports range searches.</p>
+
+<p>This can be checked by querying the console about the table:</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">book=# \d events
+</span><span class="line">                                       Table "public.events"
+</span><span class="line">  Column  |            Type             |                         Modifiers                         
+</span><span class="line">----------+-----------------------------+-----------------------------------------------------------
+</span><span class="line"> event_id | integer                     | not null default nextval('events_event_id_seq'::regclass)
+</span><span class="line"> title    | text                        | 
+</span><span class="line"> starts   | timestamp without time zone | 
+</span><span class="line"> ends     | timestamp without time zone | 
+</span><span class="line"> venue_id | integer                     | 
+</span><span class="line">Indexes:
+</span><span class="line">    "events_pkey" PRIMARY KEY, btree (event_id)
+</span><span class="line">    "events_starts" btree (starts)
+</span><span class="line">Foreign-key constraints:
+</span><span class="line">    "events_venue_id_fkey" FOREIGN KEY (venue_id) REFERENCES venues(venue_id)</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<h2>Exercises</h2>
+
+<h3>The PostgreSQL FAQ</h3>
+
+<p>The FAQ is <a href="http://wiki.postgresql.org/wiki/FAQ">here</a>.</p>
+
+<h3>The PostgreSQL Documentation</h3>
+
+<p>The documentation for version 9.1 is <a href="http://www.postgresql.org/docs/9.1/static/index.html">here</a> (and <a href="http://www.postgresql.org/docs/manuals/">there</a> for all the versions).</p>
+
+<h3>About <code>MATCH FULL</code></h3>
+
+<p>This one was already explained in the book, and confirmed by the <a href="http://www.postgresql.org/docs/current/static/sql-createtable.html">documentation</a>: when a foreign key is composed of more than one column, they must all match a row in the referenced table, or be all null.</p>
+
+<h3>Selecting user table from <code>pg_class</code></h3>
+
+<p>Interestingly, the first time I tried to solve this exercise, I used <a href="http://www.postgresql.org/docs/current/static/view-pg-tables.html"><code>pg_tables</code></a> by mistake (<code>pg_tables</code> has a <code>tableowner</code> column which makes it easy to identify user tables).</p>
+
+<p><a href="http://www.postgresql.org/docs/current/static/catalog-pg-class.html"><code>pg_class</code></a> stores the type of object in <code>relkind</code>: ‘r’ for tables. Restricting for just tables, and working on the table name:</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">book=#  select relname from pg_class where relkind = 'r';
+</span><span class="line">         relname         
+</span><span class="line">-------------------------
+</span><span class="line"> pg_statistic
+</span><span class="line"> pg_type
+</span><span class="line"> pg_attribute
+</span><span class="line"> pg_authid
+</span><span class="line"> pg_proc
+</span><span class="line"> pg_class
+</span><span class="line"> pg_database
+</span><span class="line"> pg_user_mapping
+</span><span class="line"> pg_constraint
+</span><span class="line"> pg_inherits
+</span><span class="line"> pg_index
+</span><span class="line"> pg_operator
+</span><span class="line"> pg_opfamily
+</span><span class="line"> pg_opclass
+</span><span class="line"> pg_amop
+</span><span class="line"> pg_amproc
+</span><span class="line"> pg_language
+</span><span class="line"> pg_largeobject_metadata
+</span><span class="line">...</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>Ok, that’s a bit long. Removing these <code>pg_</code> named tables:</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">book=# select relname from pg_class where relkind = 'r' and relname not like 'pg_%';
+</span><span class="line">         relname         
+</span><span class="line">-------------------------
+</span><span class="line"> sql_implementation_info
+</span><span class="line"> sql_languages
+</span><span class="line"> sql_packages
+</span><span class="line"> sql_parts
+</span><span class="line"> sql_sizing
+</span><span class="line"> sql_sizing_profiles
+</span><span class="line"> sql_features
+</span><span class="line"> countries
+</span><span class="line"> events
+</span><span class="line"> cities
+</span><span class="line"> venues
+</span><span class="line">(11 rows)</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>Interestingly, only the tables that are visible in the current database are listed (I have other databases, with more user created tables).</p>
+
+<p>Still I need to remove the <code>sql_</code> named tables. Using PostgreSQL <a href="http://www.postgresql.org/docs/current/static/functions-matching.html#FUNCTIONS-POSIX-REGEXP">regular expression operators</a>:</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">book=# select relname from pg_class where relkind = 'r' and relname !~ '^(pg_|sql_)';
+</span><span class="line">  relname  
+</span><span class="line">-----------
+</span><span class="line"> countries
+</span><span class="line"> events
+</span><span class="line"> cities
+</span><span class="line"> venues
+</span><span class="line">(4 rows)</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>This is one approach. Another would be to try to mimic the behaviour of the <code>\d</code> console command. The <a href="http://www.postgresql.org/docs/current/static/app-psql.html"><code>psql</code></a> option <code>-E</code> can be used to check what queries are used to implement specific console commands:</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ psql -E book
+</span><span class="line">psql (9.1.1)
+</span><span class="line">Type "help" for help.
+</span><span class="line">
+</span><span class="line">book=# \d
+</span><span class="line">********* QUERY **********
+</span><span class="line">SELECT n.nspname as "Schema",
+</span><span class="line">  c.relname as "Name",
+</span><span class="line">  CASE c.relkind WHEN 'r' THEN 'table' WHEN 'v' THEN 'view' WHEN 'i' THEN 'index' WHEN 'S' THEN 'sequence' WHEN 's' THEN 'special' WHEN 'f' THEN 'foreign table' END as "Type",
+</span><span class="line">  pg_catalog.pg_get_userbyid(c.relowner) as "Owner"
+</span><span class="line">FROM pg_catalog.pg_class c
+</span><span class="line">     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+</span><span class="line">WHERE c.relkind IN ('r','v','S','f','')
+</span><span class="line">      AND n.nspname &lt;&gt; 'pg_catalog'
+</span><span class="line">      AND n.nspname &lt;&gt; 'information_schema'
+</span><span class="line">      AND n.nspname !~ '^pg_toast'
+</span><span class="line">  AND pg_catalog.pg_table_is_visible(c.oid)
+</span><span class="line">ORDER BY 1,2;
+</span><span class="line">**************************
+</span><span class="line">
+</span><span class="line">                  List of relations
+</span><span class="line"> Schema |        Name         |   Type   |   Owner   
+</span><span class="line">--------+---------------------+----------+-----------
+</span><span class="line"> public | cities              | table    | fdumontmd
+</span><span class="line"> public | countries           | table    | fdumontmd
+</span><span class="line"> public | events              | table    | fdumontmd
+</span><span class="line"> public | events_event_id_seq | sequence | fdumontmd
+</span><span class="line"> public | venues              | table    | fdumontmd
+</span><span class="line"> public | venues_venue_id_seq | sequence | fdumontmd
+</span><span class="line">(6 rows)</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>The minimal query that lists the user created tables in the current database seems to be:</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">book=# select c.relname from pg_class c join pg_namespace n on n.oid = c.relnamespace where c.relkind = 'r' and pg_catalog.pg_table_is_visible(c.oid) and n.nspname &lt;&gt; 'pg_catalog';
+</span><span class="line">  relname  
+</span><span class="line">-----------
+</span><span class="line"> countries
+</span><span class="line"> events
+</span><span class="line"> cities
+</span><span class="line"> venues
+</span><span class="line">(4 rows)</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>But given that <code>pg_class</code> only lists the tables in the current database, and assuming you don’t use <code>pg_</code> or <code>sql_</code> prefixes, the first query is clearly easier.</p>
+
+<h3>Country name for the event ‘My Book Signing’</h3>
+
+<p>Based on the content of the book so far, a possible solution uses <code>INNER JOIN</code>:</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">book=# select c.country_name from events e inner join venues v on e.venue_id = v.venue_id inner join countries c on v.country_code = c.country_code where title = 'My Book Signing';
+</span><span class="line"> country_name  
+</span><span class="line">---------------
+</span><span class="line"> United States
+</span><span class="line">(1 row)</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>But this is a bit verbose. The structure of the tables makes it possible to use <a href="http://www.postgresql.org/docs/current/static/queries-table-expressions.html"><code>NATURAL JOIN</code></a>:</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">book=# select country_name from events natural join venues natural join countries where title = 'My Book Signing';
+</span><span class="line"> country_name  
+</span><span class="line">---------------
+</span><span class="line"> United States
+</span><span class="line">(1 row)</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>When using <code>NATURAL JOIN</code>, PostgreSQL will join on all the columns that are found in both tables (based on their names). For instance, both <code>events</code> and <code>venues</code> have a <code>venue_id</code> column (and no other column with the same name), so the join is on this column.</p>
+
+<p>And other interesting difference is that <code>NATURAL JOIN</code> removes the duplicate columns:</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">book=# select * from events natural join venues natural join countries where title = 'My Book Signing';
+</span><span class="line"> country_code | venue_id | event_id |      title      |       starts        |        ends         |     name      | street_address |  type   | postal_code | active | country_name  
+</span><span class="line">--------------+----------+----------+-----------------+---------------------+---------------------+---------------+----------------+---------+-------------+--------+---------------
+</span><span class="line"> us           |        2 |        1 | My Book Signing | 2012-02-15 17:30:00 | 2012-02-15 19:30:00 | Powel's Books |                | public  | 97205       | t      | United States
+</span><span class="line">(1 row)</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>whereas <code>INNER JOIN</code> does not:</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">book=# select * from events e inner join venues v on e.venue_id = v.venue_id inner join countries c on v.country_code = c.country_code where title = 'My Book Signing';
+</span><span class="line"> event_id |      title      |       starts        |        ends         | venue_id | venue_id |     name      | street_address |  type   | postal_code | country_code | active | country_code | country_name  
+</span><span class="line">----------+-----------------+---------------------+---------------------+----------+----------+---------------+----------------+---------+-------------+--------------+--------+--------------+---------------
+</span><span class="line">        1 | My Book Signing | 2012-02-15 17:30:00 | 2012-02-15 19:30:00 |        2 |        2 | Powel's Books |                | public  | 97205       | us           | t      | us           | United States
+</span><span class="line">(1 row)</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<h3>Add a new column</h3>
+
+<figure class="code"><figcaption><span>Add a new column to `venues`  </span></figcaption>
+ <div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sql"><span class="line"><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">venues</span> <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">active</span> <span class="nb">boolean</span> <span class="k">DEFAULT</span> <span class="k">TRUE</span><span class="p">;</span>
+</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>Checking that is is now there:</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">book=# \d venues
+</span><span class="line">                                        Table "public.venues"
+</span><span class="line">     Column     |          Type          |                         Modifiers                         
+</span><span class="line">----------------+------------------------+-----------------------------------------------------------
+</span><span class="line"> venue_id       | integer                | not null default nextval('venues_venue_id_seq'::regclass)
+</span><span class="line"> name           | character varying(255) | 
+</span><span class="line"> street_address | text                   | 
+</span><span class="line"> type           | character(7)           | default 'public'::bpchar
+</span><span class="line"> postal_code    | character varying(9)   | 
+</span><span class="line"> country_code   | character(2)           | 
+</span><span class="line"> active         | boolean                | default true
+</span><span class="line">Indexes:
+</span><span class="line">    "venues_pkey" PRIMARY KEY, btree (venue_id)
+</span><span class="line">Check constraints:
+</span><span class="line">    "venues_type_check" CHECK (type = ANY (ARRAY['public'::bpchar, 'private'::bpchar]))
+</span><span class="line">Foreign-key constraints:
+</span><span class="line">    "venues_country_code_fkey" FOREIGN KEY (country_code, postal_code) REFERENCES cities(country_code, postal_code) MATCH FULL
+</span><span class="line">Referenced by:
+</span><span class="line">    TABLE "events" CONSTRAINT "events_venue_id_fkey" FOREIGN KEY (venue_id) REFERENCES venues(venue_id)</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>or directly by <code>select</code>:</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">book=# select * from venues;
+</span><span class="line"> venue_id |       name       | street_address |  type   | postal_code | country_code | active 
+</span><span class="line">----------+------------------+----------------+---------+-------------+--------------+--------
+</span><span class="line">        1 | Crystal Ballroom |                | public  | 97205       | us           | t
+</span><span class="line">        2 | Powel's Books    |                | public  | 97205       | us           | t
+</span><span class="line">(2 rows)</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>And this completes Day 1. Tomorrow, stored procedures, triggers, views, rules, and other goodies are on the menu.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Frédéric Dumont</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-03T12:22:00+09:00" pubdate="" data-updated="true">Dec 3<span>rd</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class="category" href="http://blog.wakatta.jp/blog/categories/books/">Books</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <iframe allowtransparency="true" frameborder="0" scrolling="no" src="./PostgreSQL Day 1_files/tweet_button.1347008535.html" class="twitter-share-button twitter-count-horizontal" style="width: 107px; height: 20px; " title="Twitter Tweet Button" data-twttr-rendered="true"></iframe>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="http://blog.wakatta.jp/blog/2011/12/03/new-book-seven-databases-in-seven-weeks/" title="Previous Post: New Book: Seven Databases in Seven Weeks">« New Book: Seven Databases in Seven Weeks</a>
+      
+      
+        <a class="basic-alignment right" href="http://blog.wakatta.jp/blog/2011/12/03/seven-databases-in-seven-weeks-postgresql-day-2/" title="Next Post: Seven Databases in Seven Weeks PostgreSQL Day 2">Seven Databases in Seven Weeks PostgreSQL Day 2 »</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+<div id="dsq-content-stub" style="display: none; "><img width="71" height="17" alt="DISQUS" src="data:image/png;base64,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"><img width="16" height="11" alt="..." src="data:image/gif;base64,R0lGODlhEAALAPQAAP///z2LqeLt8dvp7u7090GNqz2LqV+fuJ/F1IW2ycrf51aatHWswaXJ14i4ys3h6FmctUCMqniuw+vz9eHs8fb5+meku+Tu8vT4+cfd5bbT3tbm7PH2+AAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCwAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7AAAAAAAAAAAA" style="margin:0 0 3px 5px"></div><div id="dsq-content" style="display: block; " class="clearfix">      <div id="dsq-global-toolbar" class="dsq-clearfix">        <ul class="dsq-global-toolbar-right dsq-clearfix">                            <li class="dsq-community-box">                <a href="http://blog.wakatta.jp/blog/2011/12/03/seven-databases-in-seven-weeks-postgresql-day-1/#" class="dsq-toolbar-item dsq-tt" onclick="DISQUS.dtpl.actions.fire(&#39;community.show&#39;); return false" title="Expand Community Box"><span class="dsq-toolbar-icon"></span></a>            </li>                            <li class="dsq-global-toolbar-dropdown-container">                    <div id="dsq-toolbar-dropdown">    <a href="http://blog.wakatta.jp/blog/2011/12/03/seven-databases-in-seven-weeks-postgresql-day-1/#" class="dsq-toolbar-logo dsq-toolbar-item dsq-clearfix"><span class="dsq-toolbar-icon">Disqus</span></a>    <div id="dsq-toolbar-dropdown-wrap" style="display: none">      <ul class="dsq-clearfix">                    <li class="dsq-login-link"><a href="http://blog.wakatta.jp/blog/2011/12/03/seven-databases-in-seven-weeks-postgresql-day-1/#" onclick="DISQUS.dtpl.actions.fire(&#39;auth.login&#39;); return false"><span class="dsq-toolbar-icon"></span><span class="dsq-toolbar-label">Login</span></a></li>                    <li class="dsq-about-link"><a href="http://disqus.com/" target="_blank"><span class="dsq-toolbar-icon"></span><span class="dsq-toolbar-label">About Disqus</span></a></li>      </ul>    </div>  </div>            </li>        </ul>                <ul class="dsq-global-toolbar-left dsq-clearfix">            <li class="dsq-like-thread">                <a href="http://blog.wakatta.jp/blog/2011/12/03/seven-databases-in-seven-weeks-postgresql-day-1/#" id="dsq-like-thread-button" class="dsq-toolbar-item dsq-clearfix  dsq-tt" onclick="DISQUS.dtpl.actions.fire(&#39;thread.vote&#39;, 1); return false;" title="I like this page">                    <span class="dsq-toolbar-icon"></span>                    <span class="dsq-toolbar-label">Like</span>                </a>            </li>            <li class="dsq-dislike-thread">                <a href="http://blog.wakatta.jp/blog/2011/12/03/seven-databases-in-seven-weeks-postgresql-day-1/#" id="dsq-dislike-thread-button" class="dsq-toolbar-item dsq-clearfix  dsq-tt" onclick="DISQUS.dtpl.actions.fire(&#39;thread.vote&#39;, -1); return false" title="I don&#39;t like this page">                    <span class="dsq-toolbar-icon">Dislike</span>                </a>            </li>            <li class="dsq-like-panel">                <ul class="dsq-like-faces dsq-clearfix">                        <li class="dsq-like-activity">    </li>                </ul>            </li>        </ul>            </div>    <div id="dsq-like-tooltip">      <div id="dsq-share-step-1" class="dsq-share-step">        <h3>Glad you liked it. Would you like to share?</h3>        <p class="dsq-tooltip-checkbox"><input type="checkbox" id="dsq-share-thread-facebook" value="Facebook"><label for="dsq-share-thread-facebook"><span class="dsq-facebook">Facebook</span></label></p>        <p class="dsq-tooltip-checkbox"><input type="checkbox" id="dsq-share-thread-twitter" value="Twitter"><label for="dsq-share-thread-twitter"><span class="dsq-twitter">Twitter</span></label></p>        <ul id="dsq-tooltip-actions">                        <li><a href="http://blog.wakatta.jp/blog/2011/12/03/seven-databases-in-seven-weeks-postgresql-day-1/#" onclick="DISQUS.dtpl.actions.fire(&#39;thread.share.send&#39;); return false" class="dsq-primary-action">Share</a></li>                    <li><a href="http://blog.wakatta.jp/blog/2011/12/03/seven-databases-in-seven-weeks-postgresql-day-1/#" onclick="DISQUS.dtpl.actions.fire(&#39;thread.share.cancel&#39;); return false" class="dsq-secondary-action">No thanks</a></li>        </ul>      </div>      <div id="dsq-share-step-2" class="dsq-share-step" style="display:none !important">        <p>Sharing this page …</p>      </div>      <div id="dsq-share-step-3" class="dsq-share-step" style="display:none !important">        <p>Thanks! <a href="http://blog.wakatta.jp/blog/2011/12/03/seven-databases-in-seven-weeks-postgresql-day-1/#" class="dsq-tooltip-decline" onclick="DISQUS.dtpl.actions.fire(&#39;thread.share.cancel&#39;); return false">Close</a></p>      </div>    </div>                                <div class="dsq-reply " id="dsq-reply">          <div id="dsq-account-dropdown">                  <a href="http://blog.wakatta.jp/blog/2011/12/03/seven-databases-in-seven-weeks-postgresql-day-1/#" onclick="DISQUS.dtpl.actions.fire(&#39;auth.login&#39;); return false;">Login</a>              </div>      <h3>Add New Comment</h3>        <div class="dsq-avatar">              <img src="./PostgreSQL Day 1_files/noavatar32.png">          </div>    <div class="dsq-textarea dsq-textarea-reply">      <div class="dsq-textarea-background">        <div class="dsq-textarea-wrapper" style="height: auto; ">          <!-- filled dynamically -->        <iframe name="easyXDM_DISQUS_net_default4567_provider" id="easyXDM_DISQUS_net_default4567_provider" scrolling="no" frameborder="0" src="./PostgreSQL Day 1_files/reply.html" style="height: 58px; "></iframe></div>                  <div id="dsq-media-preview" class="dsq-media-preview" style="display:none">          </div>                <div class="dsq-post-tools">          <ul>            <li class="dsq-post-as">                                <button type="button" class="dsq-button" onclick="DISQUS.dtpl.actions.fire(&#39;comments.validate&#39;, null, this);">                    Post as …                  </button>                          </li>                          <li class="dsq-attach-media">                <div class="dsq-attach-media-container">                  <span>Image</span>                  <!-- filled dynamically -->                <iframe name="easyXDM_DISQUS_net_default4568_provider" id="easyXDM_DISQUS_net_default4568_provider" scrolling="no" frameborder="0" src="./PostgreSQL Day 1_files/upload.html"></iframe></div>              </li>                        <li class="dsq-share-on dsq-clearfix">                            </li>          </ul>        </div>      </div>    </div>  </div>                              <div id="dsq-sort-by">    <select id="dsq-sort-select" onchange="DISQUS.dtpl.actions.fire(&#39;thread.sort&#39;, this.value);">              <option value="hot" selected="selected">          Sort by popular now        </option>              <option value="best">          Sort by best rating        </option>              <option value="newest">          Sort by newest first        </option>              <option value="oldest">          Sort by oldest first        </option>          </select>  </div>      <h3>            Showing <span id="dsq-num-posts">0</span> comments        </h3>        <ul id="dsq-comments">      </ul>        <div id="dsq-pagination">      <ul id="dsq-footer" class="dsq-clearfix">        <div id="dsq-subscribe">            <li>      <a href="http://blog.wakatta.jp/blog/2011/12/03/seven-databases-in-seven-weeks-postgresql-day-1/#" class="dsq-subscribe-email" onclick="return DISQUS.dtpl.actions.fire(&#39;thread.subscribe&#39;);">        <span class="dsq-font">M</span> <em>Subscribe by email</em>      </a>    </li>    <li>    <a href="http://wakatta-blog.disqus.com/seven_databases_in_seven_weeks_postgresql_day_1_wakatta/latest.rss" class="dsq-subscribe-rss">      <span class="dsq-font">S</span> <em>RSS</em>    </a>  </li>    </div>  </ul>    </div>          </div><div>  </div></div>
+  </section>
+
+</div>
+
+<aside class="sidebar thirds">
+  
+    <section class="first odd">
+  <h1>About Wakatta!</h1>
+  <p>
+		<a href="http://blog.wakatta.jp/about">more...</a>
+	</p>
+</section>
+
+<section class="even">
+	<h1>Seven Databases in Seven Weeks Series</h1>
+	
+		<ul>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/03/new-book-seven-databases-in-seven-weeks/">Intro</a></li>
+		
+			<li class="post"><a href="./PostgreSQL Day 1_files/PostgreSQL Day 1.html">PostgreSQL Day 1</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/03/seven-databases-in-seven-weeks-postgresql-day-2/">PostgreSQL Day 2</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/04/seven-databases-in-seven-weeks-postgresql-day-3/">PostgreSQL Day 3</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/08/seven-databases-in-seven-weeks-riak-day-1/">Riak Day 1</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/08/seven-databases-in-seven-weeks-riak-day-2/">Riak Day 2</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/09/seven-databases-in-seven-weeks-riak-day-3/">Riak Day 3</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/11/seven-databases-in-seven-weeks-hbase-day-1/">HBase Day 1</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/12/seven-databases-in-seven-weeks-hbase-day-2/">HBase Day 2</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/15/seven-databases-in-seven-weeks-hbase-day-3/">HBase Day 3</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/17/seven-databases-in-seven-weeks-riak-on-ec2/">Riak on EC2</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/23/seven-databases-in-seven-weeks-mongodb-day-1/">MongoDB Day 1</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/24/seven-databases-in-seven-weeks-mongodb-day-2/">MongoDB Day 2</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/25/seven-databases-in-seven-weeks-mongodb-day-3/">MongoDB Day 3</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/28/seven-databases-in-seven-weeks-neo4j-day-1/">Neo4j Day 1</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/29/seven-databases-in-seven-weeks-neo4j-day-2/">Neo4j Day 2</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2011/12/30/seven-databases-in-seven-weeks-neo4j-day-3/">Neo4j Day 3</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2012/01/20/seven-databases-in-seven-weeks-redis-day-1/">Redis Day 1</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2012/01/21/seven-databases-in-seven-weeks-redis-day-2/">Redis Day 2</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2012/01/30/seven-databases-in-seven-weeks-couchdb-day-1/">CouchDB Day 1</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2012/01/30/seven-databases-in-seven-weeks-couchdb-day-2/">CouchDB Day 2</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2012/02/01/seven-databases-in-seven-weeks-couchdb-day-3/">CouchDB Day 3</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2012/03/14/seven-databases-in-seven-weeks-redis-day-3/">Redis Day 3</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2012/03/15/seven-databases-in-seven-weeks-wrapping-up/">Wrapping Up</a></li>
+		
+			<li class="post"><a href="http://blog.wakatta.jp/blog/2012/05/02/now-im-blushing-dot-dot-dot/">Now I'm blushing...</a></li>
+		
+		</ul>
+</section>
+<section class="odd">
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="http://blog.wakatta.jp/blog/2012/05/05/concrete-mathematics-chapter-2-exam-exercises/">Concrete Mathematics Chapter 2 Exam Exercises</a>
+      </li>
+    
+      <li class="post">
+        <a href="http://blog.wakatta.jp/blog/2012/05/02/now-im-blushing-dot-dot-dot/">Now I'm blushing...</a>
+      </li>
+    
+      <li class="post">
+        <a href="http://blog.wakatta.jp/blog/2012/05/02/concrete-mathematics-chapter-2-homework-exercises/">Concrete Mathematics Chapter 2 Homework Exercises</a>
+      </li>
+    
+      <li class="post">
+        <a href="http://blog.wakatta.jp/blog/2012/04/09/machine-learning-in-action-naive-bayes/">Machine Learning in Action - Naïve Bayes</a>
+      </li>
+    
+      <li class="post">
+        <a href="http://blog.wakatta.jp/blog/2012/03/15/seven-databases-in-seven-weeks-wrapping-up/">Seven Databases in Seven Weeks Wrapping Up</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section class="first even">
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/fdumontmd">@fdumontmd</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'fdumontmd',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="./PostgreSQL Day 1_files/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    <span class="toggle-sidebar"></span></div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright © 2012 - Frédéric Dumont -
+  <span class="credit">Powered by <a href="http://octopress.org/">Octopress</a>
+  
+  </span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'wakatta-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.wakatta.jp/blog/2011/12/03/seven-databases-in-seven-weeks-postgresql-day-1/';
+        var disqus_url = 'http://blog.wakatta.jp/blog/2011/12/03/seven-databases-in-seven-weeks-postgresql-day-1/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+
+
+<iframe name="easyXDM_DISQUS_net_default4566_provider" id="easyXDM_DISQUS_net_default4566_provider" style="position: absolute; top: -2000px; left: 0px; " frameborder="0" src="./PostgreSQL Day 1_files/def.html"></iframe><div id="tmloading"><div class="tm-chrome-share-selection-container" style="left: 741px; top: 6051px; position: absolute; "><div class="tm-chrome-share-selection-btn"></div><div class="tm-chrome-disable-quick-start"><h1>Highlight and Share</h1><span><a>Disable</a> this feature.</span></div></div></div></body></html>
