@@ -1,0 +1,1 @@
+cmd_/home/abhi/Projects/workspace/startstop.o := ld -m elf_x86_64   -r -o /home/abhi/Projects/workspace/startstop.o /home/abhi/Projects/workspace/spanningMultipleFile_start.o /home/abhi/Projects/workspace/spanningMultipleFile_stop.o 
