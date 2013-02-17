@@ -1,0 +1,5 @@
+const_check1.c~
+const_check2.c~
+fetching_thread_exit_status.c~
+incorrect_use_pthread_exit.c~
+printing_thread_ids.c~
