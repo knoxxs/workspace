@@ -17,12 +17,13 @@ results obtained from use of this software.
 
 #include <stdio.h>
 #include "general.h"
+#include <errno.h>
 
 FILE *rr_fopen(char *filename, char *mode)
 {
   FILE *fp;
   fp = fopen(filename,mode);
   if (!fp) 
-    quit(-1,"rr_fopen: problems opening %s for \"%s\".\n", filename, mode);
+    quit(-1,"rr_fopen: problems opening %s for \"%s\".Error - %s\n", filename, mode,strerror(errno));
   return(fp);
 }
