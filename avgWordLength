@@ -1,9 +1,0 @@
-totalWords=0
-totalLength=0
-for word in $(<del)
-do
-	totalWords=$totalWords+1
-	totalLength=$totalLength+${#word}
-done
-
-printf 'Total word is %d and totalLength is %d.\n Avg. Length = %f\n' "$totalWord" "$totalLength" "$totalLength/$totalWords"
