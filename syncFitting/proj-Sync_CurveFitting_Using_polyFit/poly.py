@@ -28,13 +28,13 @@ def plotOriginal():
 def main():
 	x,y = plotOriginal()
 	errors = []
-	for l in range(6,20):
+	for l in range(1,20):
 		error,output = approxSinc(x, y, l)
 		errors.append(error)
 		mp.plot(x,output) #plotting the approximate curve
-		mp.savefig('pol(' + str(l) +').jpg')
+		mp.savefig('pol_' + str(l) +'.jpg')
 		mp.clf()
 
-	mp.plot(range(6,20),errors)
+	mp.plot(range(1,20),errors)
 	mp.savefig('error.jpg')
 	mp.clf()
