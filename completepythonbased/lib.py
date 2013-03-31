@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import operator
 import sys
 import os
+import collections
 
 def avgWordLength(fileName):
 	f = open(fileName,'r')
@@ -175,7 +176,6 @@ def heapLawStats(corpus):
 			uniqueWords.append(len(words))
 			f.close()
 
-
 	pairs = zip(totalWords, uniqueWords)
 	sorted_pairs = sorted(pairs, key=operator.itemgetter(1))
 
@@ -185,8 +185,8 @@ def heapLawStats(corpus):
 
 	plt.clf()
 	plt.plot(totalWords, uniqueWords)
-	plt.savefig('heapGraph.png')
-	os.system('eog heapGraph.png &')
+	plt.savefig(corpus + 'heapGraph.png')
+	os.system('eog '+ corpus +'heapGraph.png &')
 
 	return zip(totalWords, uniqueWords)
 
@@ -204,8 +204,10 @@ def typeTokenRatio(corpus):
 			terms = set(tokens)
 			ratio.append([len(terms),len(tokens)])
 			f.close()
+	docRatio = [float(doc[0])/doc[1] for doc in ratio]
+	corpusRatio = numpy.asarray(ratio)
+	return docRatio,float(sum(corpusRatio[:,0]))/sum(corpusRatio[:,1])
 
-	ratio = numpy.asarray(ratio)
-	return float(sum(ratio[:,0]))/sum(ratio[:,1])
 
-print(totalCVOccurences('../../DATA/Fire/AD_Hoc/Hindi/hi.docs.2011/'))
+#print(totalCVOccurences('../../DATA/Fire/AD_Hoc/Hindi/hi.docs.2011/'))
+print(completeStats('./dir/dir'))

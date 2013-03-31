@@ -1,15 +1,20 @@
+# -*- coding: utf-8 -*-
+
 import math
 import numpy
 
-f = open('./dir/del','r')
+f = open('./dir/hindiTest','r')
 
 totalLines = 0
 totalLength = 0
 lengths = []
-
+print('।'.decode('utf-8'))
 for line in f:
 		totalLines += 1
+		print(line)
 		length = len(line.decode('utf-8'))
+		print('--------')
+		print(line)
 		totalLength += length
 		lengths.append(length)
 
