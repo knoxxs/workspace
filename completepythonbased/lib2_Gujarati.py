@@ -112,6 +112,7 @@ def completeStats(corpus):
 			f = open(direc[0]+'/'+afile,'r')
 			sentences = f.read().split('.')
 			sentences.pop()
+			sentences = [sentence for sentence in sentences if sentence != '']
 			tokensPerSentence = [sentence.split() for sentence in sentences]
 			data.append([sentences, tokensPerSentence])
 			f.close()

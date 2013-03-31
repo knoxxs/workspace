@@ -62,8 +62,8 @@ def heapLawStats(data, corpusName):
 
 	plt.clf()
 	plt.plot(totalWords, uniqueWords)
-	plt.savefig(corpusName + 'heapGraph.png')
-	os.system('eog '+ corpusName +'heapGraph.png &')
+	plt.savefig(corpusName + '_heapGraph.png')
+	os.system('eog '+ corpusName +'_heapGraph.png &')
 
 	return zip(totalWords, uniqueWords)
 
@@ -112,6 +112,7 @@ def completeStats(corpus):
 			f = open(direc[0]+'/'+afile,'r')
 			sentences = f.read().split('।')
 			sentences.pop()
+			sentences = [sentence for sentence in sentences if sentence != '']
 			tokensPerSentence = [sentence.split() for sentence in sentences]
 			data.append([sentences, tokensPerSentence])
 			f.close()
@@ -119,11 +120,17 @@ def completeStats(corpus):
 	counter = collections.Counter(sum( [sum(d[1],[]) for d in data], []) )
 	termStats = [counter.keys(), counter.values()]
 	
+	print('wordLengthResult')
 	wordLengthResult = wordLengthStats(termStats)
+	print('sentenceLengthResult')
 	sentenceLengthResult = sentenceLengthStats(data, termStats)
+	print('typeTokenRatioResult')
 	typeTokenRatioResult = float(len(termStats[0]))/sum(termStats[1])
+	print('compoundTermsResult')
 	compoundTermsResult = compundTermStats(termStats, wordLengthResult[5])
+	print('CVOccurencesResult')
 	CVOccurencesResult = CVOccurencesStats(termStats, wordLengthResult[5])
+	print('heapLawDataResult')
 	heapLawDataResult = heapLawStats(data, corpus)
 
 	print('Corpus : ' + corpus + '\nTotal Docs : ' + str(len(data)))
@@ -137,8 +144,8 @@ def completeStats(corpus):
 	print('totlal Compound Terms / Total Words : ' + str(compoundTermsResult))
 	print("-------------CV Occurences Stats----------------")
 	print('Total CV Occurences / Total Words : ' + str(CVOccurencesResult))
-	f = open(corpus+'heapData','w')
+	f = open(corpus+'_heapData','w')
 	pickle.dump(heapLawDataResult, f)
 	f.close()
 
-completeStats('./dir/dir')
+completeStats('../../DATA/Fire/AD_Hoc/Hindi/hi.docs.2011/Clean2/')
