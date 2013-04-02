@@ -116,7 +116,8 @@ def completeStats(corpus):
 			tokensPerSentence = [sentence.split() for sentence in sentences]
 			data.append([sentences, tokensPerSentence])
 			f.close()
-
+	print()
+	print("Composing termStats")
 	counter = collections.Counter(sum( [sum(d[1],[]) for d in data], []) )
 	termStats = [counter.keys(), counter.values()]
 	
@@ -148,4 +149,4 @@ def completeStats(corpus):
 	pickle.dump(heapLawDataResult, f)
 	f.close()
 
-completeStats('../../DATA/Fire/AD_Hoc/Hindi/hi.docs.2011/Clean2/')
+completeStats('../../DATA/Fire/AD_Hoc/Hindi/hi.docs.2011/Clean2/hi_NavbharatTimes/h2f2008')
