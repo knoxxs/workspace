@@ -47,3 +47,54 @@ totlal Compound Terms / Total Words : 0.188289093662
 Total CV Occurences / Total Words : 1.5076179233
 
 
+Corpus : ../../DATA/Fire/AD_Hoc/Hindi/hi.docs.2011/Clean2/hi_NavbharatTimes/h2f2008
+Total Docs : 42100
+-------------Word Length Stats----------------
+Average Word Length : 3.91601924903
+Standard Deviation : 678.214872176
+Median : 14.0
+Min Word Length : 1
+Max Word Length : 1126791
+Total Words : 12017230
+-------------Sentence Length Stats----------------
+Average Sentence Length : 18.7275572047
+Standard Deviation : 10.0997568927
+Median : 17.0
+Min Sentence Length : 0
+Max Sentence Length : 658
+Total Sentences : 641687
+-------------Type Token Ratio Stats----------------
+type/token : 0.00962334914119
+-------------Compound Term Stats----------------
+totlal Compound Terms / Total Words : 0.150740395249
+-------------CV Occurences Stats----------------
+Total CV Occurences / Total Words : 1.47684757635
+
+
+
+Corpus : ../../DATA/Fire/AD_Hoc/Hindi/hi.docs.2011/Clean2/hi_NavbharatTimes/h2f2006_07
+Total Docs : 69798
+-------------Word Length Stats----------------
+Average Word Length : 3.94721014978
+Standard Deviation : 851.723978955
+Median : 14.0
+Min Word Length : 1
+Max Word Length : 1757214
+Total Words : 18375180
+-------------Sentence Length Stats----------------
+Average Sentence Length : 19.7390072263
+Standard Deviation : 10.5332365104
+Median : 18.0
+Min Sentence Length : 0
+Max Sentence Length : 519
+Total Sentences : 930907
+-------------Type Token Ratio Stats----------------
+type/token : 0.00769505387158
+-------------Compound Term Stats----------------
+totlal Compound Terms / Total Words : 0.158893028531
+-------------CV Occurences Stats----------------
+Total CV Occurences / Total Words : 1.48764746794
+
+
+
+

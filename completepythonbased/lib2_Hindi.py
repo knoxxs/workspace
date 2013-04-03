@@ -149,4 +149,4 @@ def completeStats(corpus):
 	pickle.dump(heapLawDataResult, f)
 	f.close()
 
-completeStats('../../DATA/Fire/AD_Hoc/Hindi/hi.docs.2011/Clean2/hi_NavbharatTimes/h2f2008')
+completeStats('../../DATA/Fire/AD_Hoc/Hindi/hi.docs.2011/Clean2/hi_NavbharatTimes/h2f2006_07')
