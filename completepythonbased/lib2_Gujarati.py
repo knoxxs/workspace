@@ -120,11 +120,17 @@ def completeStats(corpus):
 	counter = collections.Counter(sum( [sum(d[1],[]) for d in data], []) )
 	termStats = [counter.keys(), counter.values()]
 	
+	print('wordLengthResult')
 	wordLengthResult = wordLengthStats(termStats)
+	print('sentenceLengthResult')
 	sentenceLengthResult = sentenceLengthStats(data, termStats)
+	print('typeTokenRatioResult')
 	typeTokenRatioResult = float(len(termStats[0]))/sum(termStats[1])
+	print('compoundTermsResult')
 	compoundTermsResult = compundTermStats(termStats, wordLengthResult[5])
+	print('CVOccurencesResult')
 	CVOccurencesResult = CVOccurencesStats(termStats, wordLengthResult[5])
+	print('heapLawDataResult')
 	heapLawDataResult = heapLawStats(data, corpus)
 
 	print('Corpus : ' + corpus + '\nTotal Docs : ' + str(len(data)))
@@ -142,4 +148,4 @@ def completeStats(corpus):
 	pickle.dump(heapLawDataResult, f)
 	f.close()
 
-completeStats('./dir/dir')
+completeStats('../../DATA/Fire/AD_Hoc/Gujarati/gu.docs.2011/GujaratSamachar/gsf2002/')
