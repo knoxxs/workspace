@@ -1,0 +1,23 @@
+--------------------------SentenceLengthResult-------------------------------
+Corpus : ../../../../DATA/Fire/AD_Hoc/Hindi/hi.docs.2011/Clean
+Total Docs : 164228
+-------------Sentence Length Stats----------------
+Average Sentence Length : 19.7122516451
+Standard Deviation : 10.7564149229
+Median : 18.0
+Min Sentence Length : 0
+Max Sentence Length : 1295
+Total Sentences : 2415847
+Total Words : 47621784
+
+--------------------------SentenceLengthResult-------------------------------
+Corpus : ../../../../DATA/Fire/AD_Hoc/Gujarati/gu.docs.2011/Clean
+Total Docs : 313163
+-------------Sentence Length Stats----------------
+Average Sentence Length : 11.2007886615
+Standard Deviation : 12.0276277321
+Median : 8.0
+Min Sentence Length : 0
+Max Sentence Length : 3049
+Total Sentences : 11795935
+Total Words : 132123775

@@ -1,0 +1,186 @@
+Corpus : ../../DATA/Fire/AD_Hoc/Hindi/hi.docs.2011/Clean/Amar_Ujala
+Total Docs : 33634
+-------------Word Length Stats----------------
+Average Word Length : 4.02511599656
+Standard Deviation : 0.20954010474340404
+Median : 13.0
+Min Word Length : 1
+Max Word Length : 1148334
+Total Words : 11712416
+-------------Sentence Length Stats----------------
+Average Sentence Length : 19.7944505849
+Standard Deviation : 9.93467091027
+Median : 18.0
+Min Sentence Length : 0
+Max Sentence Length : 331
+Total Sentences : 591702
+-------------Type Token Ratio Stats----------------
+type/token : 0.0096551386153
+-------------Compound Term Stats----------------
+totlal Compound Terms / Total Words : 0.169570650496
+-------------CV Occurences Stats----------------
+Total CV Occurences / Total Words : 1.51352854953
+
+
+
+Corpus : ../../DATA/Fire/AD_Hoc/Hindi/hi.docs.2011/Clean2/hi_NavbharatTimes/h2f2002
+Total Docs : 18696
+-------------Word Length Stats----------------
+Average Word Length : 4.05273785888
+Standard Deviation : 0.2076301512061919
+Median : 12.0
+Min Word Length : 1
+Max Word Length : 513708
+Total Words : 5255238
+-------------Sentence Length Stats----------------
+Average Sentence Length : 22.4657706415
+Standard Deviation : 11.5358034736
+Median : 20.0
+Min Sentence Length : 0
+Max Sentence Length : 299
+Total Sentences : 233922
+-------------Type Token Ratio Stats----------------
+type/token : 0.0146406309286
+-------------Compound Term Stats----------------
+totlal Compound Terms / Total Words : 0.188289093662
+-------------CV Occurences Stats----------------
+Total CV Occurences / Total Words : 1.5076179233
+
+
+Corpus : ../../DATA/Fire/AD_Hoc/Hindi/hi.docs.2011/Clean2/hi_NavbharatTimes/h2f2008
+Total Docs : 42100
+-------------Word Length Stats----------------
+Average Word Length : 3.91601924903
+Standard Deviation : 678.214872176
+Median : 14.0
+Min Word Length : 1
+Max Word Length : 1126791
+Total Words : 12017230
+-------------Sentence Length Stats----------------
+Average Sentence Length : 18.7275572047
+Standard Deviation : 10.0997568927
+Median : 17.0
+Min Sentence Length : 0
+Max Sentence Length : 658
+Total Sentences : 641687
+-------------Type Token Ratio Stats----------------
+type/token : 0.00962334914119
+-------------Compound Term Stats----------------
+totlal Compound Terms / Total Words : 0.150740395249
+-------------CV Occurences Stats----------------
+Total CV Occurences / Total Words : 1.47684757635
+
+
+
+Corpus : ../../DATA/Fire/AD_Hoc/Hindi/hi.docs.2011/Clean2/hi_NavbharatTimes/h2f2006_07
+Total Docs : 69798
+-------------Word Length Stats----------------
+Average Word Length : 3.94721014978
+Standard Deviation : 851.723978955
+Median : 14.0
+Min Word Length : 1
+Max Word Length : 1757214
+Total Words : 18375180
+-------------Sentence Length Stats----------------
+Average Sentence Length : 19.7390072263
+Standard Deviation : 10.5332365104
+Median : 18.0
+Min Sentence Length : 0
+Max Sentence Length : 519
+Total Sentences : 930907
+-------------Type Token Ratio Stats----------------
+type/token : 0.00769505387158
+-------------Compound Term Stats----------------
+totlal Compound Terms / Total Words : 0.158893028531
+-------------CV Occurences Stats----------------
+Total CV Occurences / Total Words : 1.48764746794
+
+
+---------COMBINED (NavbharatTimes)---------------
+
+Total Docs : 130594
+-------------Word Length Stats----------------
+Average Word Length : 11.91596725769/3 = 3.97198908589666666666
+*Standard Deviation : 851.723978955
+*Median : 14.0
+Min Word Length : 1
+Max Word Length : 1757214
+Total Words : 35647648
+-------------Sentence Length Stats----------------
+Average Sentence Length : 60.9323350725/3 = 20.31077835750000000000
+*Standard Deviation : 10.5332365104
+*Median : 18.0
+Min Sentence Length : 0
+Max Sentence Length : 658
+Total Sentences : 1806516
+-------------Type Token Ratio Stats----------------
+type/token : (0.0146406309286 * 5255238 + 0.00962334914119 * 12017230 + 0.00769505387158 * 18375180)/35647648 = 333983.99999991609490/35647648 = 0.00936903326693295711
+-------------Compound Term Stats----------------
+totlal Compound Terms / Total Words : (0.188289093662 * 5255238 + 0.150740395249 * 12017230 + 0.158893028531 * 18375180)/35647648 = 5720673.999998502406/35647648 = 0.16047830140149786056
+-------------CV Occurences Stats----------------
+Total CV Occurences / Total Words :  (1.5076179233 * 5255238 + 1.47684757635 * 12017230 + 1.48764746794 * 18375180)/35647648 = 53006297.99988948510/35647648 = 1.48695078003153209715
+
+
+
+
+---------COMBINED (NavbharatTimes + Amar_Ujala)---------------
+
+Total Docs : 164228
+-------------Word Length Stats----------------
+Average Word Length : 7.99710508245666666666/2 = 3.99855254122833333333
+*Standard Deviation : 851.723978955
+*Median : 14.0
+Min Word Length : 1
+Max Word Length : 1757214
+Total Words : 47360064
+-------------Sentence Length Stats----------------
+Average Sentence Length : 40.10522894240000000000/2 = 20.05261447120000000000
+*Standard Deviation : 10.5332365104
+*Median : 18.0
+Min Sentence Length : 0
+Max Sentence Length : 658
+Total Sentences : 2398218
+-------------Type Token Ratio Stats----------------
+type/token : (0.00936903326693295711*35647648 + 0.0096551386153 * 11712416)/47360064 = 447068.99999997365945637728/47360064 = .00943978876379841166
+-------------Compound Term Stats----------------
+totlal Compound Terms / Total Words : (.16047830140149786056*35647648 + 0.169570650496 * 11712416)/47360064 = 7706755.99999826074199596288/47360064 = .16272689158524491736
+-------------CV Occurences Stats----------------
+Total CV Occurences / Total Words :  (1.48695078003153209715*35647648 + 1.51352854953 * 11712416)/47360064 = 70733373.99986144957990500320/47360064 = 1.49352361516786484029
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------Gujarati---------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+Corpus : ../../../DATA/Fire/AD_Hoc/Clean/Gujarati/GujaratSamachar/gsf2002
+Total Docs : 38933
+-------------Word Length Stats----------------
+Average Word Length : 0.358600926664
+Standard Deviation : 1.68427530871
+Median : 8.0
+Min Word Length : 1
+Max Word Length : 36
+Total Words : 17090112
+-------------Sentence Length Stats----------------
+Average Sentence Length : 10.8447435067
+Standard Deviation : 11.4536671072
+Median : 8.0
+Min Sentence Length : 0
+Max Sentence Length : 723
+Total Sentences : 1575889
+-------------Type Token Ratio Stats----------------
+type/token : 0.0309694869173
+-------------Compound Term Stats----------------
+totlal Compound Terms / Total Words : 4.09593570832e-07
+-------------CV Occurences Stats----------------
+Total CV Occurences / Total Words : 7.84079121307e-06
