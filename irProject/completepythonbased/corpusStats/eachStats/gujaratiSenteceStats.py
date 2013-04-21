@@ -60,4 +60,7 @@ def sentenceLengthStats(corpus):
 
 
 #sentenceLengthStats('../test/gujarati')
-sentenceLengthStats('../../../../DATA/Fire/AD_Hoc/Gujarati/gu.docs.2011/Clean')
+sentenceLengthStats('~/Projects/DATA/')
+if sys.argv[1] == '-h':
+	print("Usage: ./gujaratiSenteceStats <corpus> > outputFile")
+	sys.exit()

@@ -1,0 +1,4 @@
+n,k conditions in selected features is > not >=
+
+features.dump: x-axis->tags, y-axis->docs
+slecetedFeatures.dump: x-axis->docs, y-axis->tags
